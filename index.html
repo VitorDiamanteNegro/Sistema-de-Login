@@ -3,30 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Login</title>
+    <title>Sistema de Login e Cadastro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <div class="login-box">
-            <div class="logo">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgZmlsbD0iIzQyODVmNCIvPjxwYXRoIGQ9Ik0zMCAzMEg3MFY3MEgzMFYzMHoiIGZpbGw9IiNmZmYiLz48dGV4dCB4PSI1MCIgeT0iNjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzQyODVmNCI+TG9naW48L3RleHQ+PC9zdmc+" alt="Logo Meu App">
-                <h1>Meu App</h1>
+        <div class="welcome-panel">
+            <h2>Bem-vindo ao MeuApp</h2>
+            <p>Faça login ou cadastre-se para acessar recursos exclusivos e personalizados do nosso sistema.</p>
+            <div class="feature-list">
+                <div class="feature">
+                    <h3>Segurança</h3>
+                    <p>Seus dados protegidos com criptografia avançada.</p>
+                </div>
+                <div class="feature">
+                    <h3>Praticidade</h3>
+                    <p>Acesse de qualquer dispositivo, a qualquer hora.</p>
+                </div>
+                <div class="feature">
+                    <h3>Personalização</h3>
+                    <p>Experiência customizada de acordo com suas preferências.</p>
+                </div>
             </div>
-            <form id="loginForm">
-                <div class="input-group">
-                    <label for="username">Usuário</label>
-                    <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div class="form-panel">
+            <div class="form-container">
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgZmlsbD0iIzQyODVmNCIvPjxwYXRoIGQ9Ik0zMCAzMEg3MFY3MEgzMFYzMHoiIGZpbGw9IiNmZmYiLz48dGV4dCB4PSI1MCIgeT0iNjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzQyODVmNCI+TG9naW48L3RleHQ+PC9zdmc+" alt="Logo MeuApp">
+                    <h1>MeuApp</h1>
                 </div>
-                <div class="input-group">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" required>
+                
+                <div class="tabs">
+                    <div class="tab active" data-tab="login">Login</div>
+                    <div class="tab" data-tab="cadastro">Cadastro</div>
                 </div>
-                <button type="submit">Entrar</button>
-            </form>
-            <p class="hint">Dica: Use seu nome como usuário e sua data de aniversário como senha (formato DDMMAAAA)</p>
+                
+                <form id="loginForm" class="form active">
+                    <div class="input-group">
+                        <label for="loginUsername">Usuário</label>
+                        <input type="text" id="loginUsername" name="username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="loginPassword">Senha</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                    </div>
+                    <button type="submit">Entrar</button>
+                    <div id="loginAlert" class="alert"></div>
+                </form>
+                
+                <form id="cadastroForm" class="form">
+                    <div class="input-group">
+                        <label for="cadastroUsername">Usuário</label>
+                        <input type="text" id="cadastroUsername" name="username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="cadastroPassword">Senha</label>
+                        <input type="password" id="cadastroPassword" name="password" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirmPassword">Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <button type="submit">Cadastrar</button>
+                    <div id="cadastroAlert" class="alert"></div>
+                </form>
+                
+                <p class="hint">Dica: Use seu nome como usuário e sua data de aniversário como senha (formato DDMMAAAA)</p>
+            </div>
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>

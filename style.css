@@ -13,7 +13,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: auto;
     padding: 20px;
 }
 
@@ -33,15 +33,13 @@ body {
     flex: 1.2;
     background: linear-gradient(135deg, #4285f4 0%, #3367d6 100%);
     color: white;
-    padding: 50px 40px;
+    padding: 40px 35px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     position: relative;
     overflow: hidden;
     z-index: 1;
+    overflow-y: auto;
 }
 
 .welcome-panel::before {
@@ -71,7 +69,6 @@ body {
 .welcome-content {
     z-index: 2;
     width: 100%;
-    max-width: 400px;
 }
 
 .welcome-panel h2 {
@@ -79,13 +76,15 @@ body {
     font-size: 32px;
     font-weight: 600;
     line-height: 1.3;
+    text-align: center;
 }
 
 .welcome-panel p {
-    margin-bottom: 35px;
+    margin-bottom: 30px;
     font-size: 17px;
     line-height: 1.6;
     opacity: 0.9;
+    text-align: center;
 }
 
 .feature-list {
@@ -110,38 +109,43 @@ body {
     font-size: 28px;
     margin-bottom: 15px;
     color: #fff;
+    display: block;
+    text-align: center;
 }
 
 .feature h3 {
     margin-bottom: 12px;
     font-size: 20px;
     font-weight: 500;
+    text-align: center;
 }
 
 .feature p {
     margin-bottom: 0;
     font-size: 16px;
     opacity: 0.8;
+    text-align: center;
 }
 
 .form-panel {
     flex: 1;
-    padding: 40px;
+    padding: 35px 40px;
     display: flex;
     justify-content: center;
-    align-items: center;
     overflow-y: auto;
 }
 
 .form-container {
     width: 100%;
     max-width: 420px;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .logo {
     text-align: center;
     margin-bottom: 30px;
+    flex-shrink: 0;
 }
 
 .logo-icon {
@@ -172,6 +176,7 @@ body {
     display: flex;
     margin-bottom: 30px;
     border-bottom: 2px solid #eee;
+    flex-shrink: 0;
 }
 
 .tab {
@@ -201,10 +206,14 @@ body {
 .form {
     display: none;
     animation: fadeIn 0.5s ease;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 5px;
 }
 
 .form.active {
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 
 @keyframes fadeIn {
@@ -214,6 +223,7 @@ body {
 
 .input-group {
     margin-bottom: 25px;
+    flex-shrink: 0;
 }
 
 .input-group label {
@@ -258,6 +268,7 @@ body {
     align-items: center;
     margin-bottom: 25px;
     font-size: 15px;
+    flex-shrink: 0;
 }
 
 .remember {
@@ -314,6 +325,7 @@ body {
 .terms {
     margin-bottom: 25px;
     font-size: 15px;
+    flex-shrink: 0;
 }
 
 .terms a {
@@ -341,6 +353,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
 }
 
 .btn-primary:hover {
@@ -356,6 +369,7 @@ body {
     display: none;
     animation: slideIn 0.5s ease;
     font-size: 15px;
+    flex-shrink: 0;
 }
 
 @keyframes slideIn {
@@ -383,17 +397,46 @@ body {
     color: #777;
     text-align: center;
     line-height: 1.5;
+    flex-shrink: 0;
 }
 
-/* Efeito de shake para erros */
-.shake {
-    animation: shake 0.5s;
+/* Scroll personalizado */
+.welcome-panel::-webkit-scrollbar,
+.form-panel::-webkit-scrollbar,
+.form::-webkit-scrollbar {
+    width: 6px;
 }
 
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
+.welcome-panel::-webkit-scrollbar-track,
+.form-panel::-webkit-scrollbar-track,
+.form::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.welcome-panel::-webkit-scrollbar-thumb,
+.form-panel::-webkit-scrollbar-thumb,
+.form::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.welcome-panel::-webkit-scrollbar-thumb:hover,
+.form-panel::-webkit-scrollbar-thumb:hover,
+.form::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.form-panel::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.form-panel::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+}
+
+.form-panel::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
 }
 
 /* Responsividade */
@@ -406,11 +449,12 @@ body {
     }
     
     .welcome-panel {
-        padding: 40px 30px;
+        padding: 30px;
+        max-height: 400px;
     }
     
     .form-panel {
-        padding: 40px 30px;
+        padding: 30px;
     }
     
     .form-container {
@@ -418,21 +462,11 @@ body {
     }
 }
 
-/* Scroll personalizado para o painel do formulário */
-.form-panel::-webkit-scrollbar {
-    width: 6px;
+/* Ajustes para garantir que todo conteúdo seja visível com scroll */
+.form-container {
+    min-height: min-content;
 }
 
-.form-panel::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-.form-panel::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 10px;
-}
-
-.form-panel::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+.form.active {
+    min-height: min-content;
 }

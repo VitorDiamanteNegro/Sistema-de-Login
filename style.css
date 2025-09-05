@@ -18,8 +18,8 @@ body {
 
 .container {
     width: 100%;
-    max-width: 900px;
-    height: 550px;
+    max-width: 1000px;
+    height: 600px;
     display: flex;
     background-color: #fff;
     border-radius: 20px;
@@ -29,7 +29,7 @@ body {
 }
 
 .welcome-panel {
-    flex: 1;
+    flex: 1.2;
     background: linear-gradient(135deg, #4285f4 0%, #3367d6 100%);
     color: white;
     padding: 40px;
@@ -69,6 +69,7 @@ body {
 
 .welcome-content {
     z-index: 2;
+    width: 100%;
 }
 
 .welcome-panel h2 {
@@ -90,7 +91,7 @@ body {
 
 .feature {
     margin-bottom: 20px;
-    padding: 15px;
+    padding: 20px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     backdrop-filter: blur(5px);
@@ -130,7 +131,7 @@ body {
 
 .form-container {
     width: 100%;
-    max-width: 350px;
+    max-width: 400px;
 }
 
 .logo {
@@ -230,7 +231,7 @@ body {
 
 .input-with-icon input {
     width: 100%;
-    padding: 12px 15px 12px 45px;
+    padding: 14px 15px 14px 45px;
     border: 2px solid #e0e0e0;
     border-radius: 10px;
     font-size: 16px;
@@ -316,7 +317,7 @@ body {
 
 .btn-primary {
     width: 100%;
-    padding: 14px;
+    padding: 16px;
     background: linear-gradient(135deg, #4285f4 0%, #3367d6 100%);
     color: white;
     border: none;
@@ -371,11 +372,22 @@ body {
     text-align: center;
 }
 
+/* Efeito de shake para erros */
+.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
 /* Responsividade */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .container {
         flex-direction: column;
-        max-width: 400px;
+        max-width: 450px;
         height: auto;
     }
     
@@ -385,5 +397,9 @@ body {
     
     .form-panel {
         padding: 30px;
+    }
+    
+    .form-container {
+        max-width: 100%;
     }
 }

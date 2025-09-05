@@ -147,4 +147,9 @@ document.addEventListener('DOMContentLoaded', function() {
             this.parentElement.classList.remove('focused');
         });
     });
+    
+    // Resetar a cor da borda quando o usuário começar a digitar
+    document.getElementById('confirmPassword').addEventListener('input', function() {
+        this.style.borderColor = '#e0e0e0';
+    });
 });

@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const users = JSON.parse(localStorage.getItem('users')) || {};
         
         if (users[username] && users[username] === password) {
-            showAlert(alert, 'Login realizado com sucesso!', 'success');
+            showAlert(alert, 'Login realizado com sucesso! Redirecionando...', 'success');
             
             // Limpar o formulário
             this.reset();
@@ -49,6 +49,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1500);
         } else {
             showAlert(alert, 'Usuário ou senha incorretos!', 'error');
+            
+            // Adicionar animação de shake no formulário
+            this.classList.add('shake');
+            setTimeout(() => {
+                this.classList.remove('shake');
+            }, 500);
         }
     });
     
@@ -59,11 +65,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const username = document.getElementById('cadastroUsername').value;
         const password = document.getElementById('cadastroPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
+        const terms = document.getElementById('terms').checked;
         const alert = document.getElementById('cadastroAlert');
+        
+        // Validar se os termos foram aceitos
+        if (!terms) {
+            showAlert(alert, 'Você deve aceitar os termos e condições!', 'error');
+            return;
+        }
         
         // Validar se as senhas coincidem
         if (password !== confirmPassword) {
             showAlert(alert, 'As senhas não coincidem!', 'error');
+            
+            // Destacar o campo de confirmação de senha
+            document.getElementById('confirmPassword').style.borderColor = '#f44336';
             return;
         }
         
@@ -119,4 +135,16 @@ document.addEventListener('DOMContentLoaded', function() {
         users[defaultUsername] = defaultPassword;
         localStorage.setItem('users', JSON.stringify(users));
     }
+    
+    // Adicionar efeito de foco nos inputs
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            this.parentElement.classList.remove('focused');
+        });
+    });
 });

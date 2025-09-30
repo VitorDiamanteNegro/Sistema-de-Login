@@ -64,434 +64,26 @@ class AuthSystem {
         // Carregar flashcards e baralhos do localStorage
         if (!localStorage.getItem('flashstudy_flashcards')) {
             const initialFlashcards = [
-                // MATEMÁTICA (12 flashcards)
                 {
-                    id: 'math1',
-                    question: 'Qual é a fórmula do Teorema de Pitágoras?',
-                    answer: 'a² = b² + c², onde a é a hipotenusa e b e c são os catetos de um triângulo retângulo.',
-                    category: 'matematica',
-                    deckId: '2'
-                },
-                {
-                    id: 'math2',
-                    question: 'O que é uma equação do segundo grau?',
-                    answer: 'É uma equação polinomial de grau 2, na forma ax² + bx + c = 0, onde a, b e c são coeficientes reais e a ≠ 0.',
-                    category: 'matematica',
-                    deckId: '2'
-                },
-                {
-                    id: 'math3',
-                    question: 'Como se calcula a área de um círculo?',
-                    answer: 'A = π × r², onde π (pi) é aproximadamente 3.14159 e r é o raio do círculo.',
-                    category: 'matematica',
-                    deckId: '2'
-                },
-                {
-                    id: 'math4',
-                    question: 'O que são números primos?',
-                    answer: 'São números naturais maiores que 1 que possuem apenas dois divisores: 1 e ele mesmo. Exemplos: 2, 3, 5, 7, 11, 13...',
-                    category: 'matematica',
-                    deckId: '2'
-                },
-                {
-                    id: 'math5',
-                    question: 'Qual é a fórmula da soma dos ângulos internos de um polígono?',
-                    answer: 'S = (n - 2) × 180°, onde n é o número de lados do polígono.',
-                    category: 'matematica',
-                    deckId: '2'
-                },
-                {
-                    id: 'math6',
-                    question: 'O que é o MMC (Mínimo Múltiplo Comum)?',
-                    answer: 'É o menor número que é múltiplo comum de dois ou mais números.',
-                    category: 'matematica',
-                    deckId: '2'
-                },
-                {
-                    id: 'math7',
-                    question: 'Como se calcula o volume de um cubo?',
-                    answer: 'V = a³, onde a é o comprimento da aresta do cubo.',
-                    category: 'matematica',
-                    deckId: '2'
-                },
-                {
-                    id: 'math8',
-                    question: 'O que é uma função quadrática?',
-                    answer: 'É uma função polinomial de grau 2, representada por f(x) = ax² + bx + c, cujo gráfico é uma parábola.',
-                    category: 'matematica',
-                    deckId: '2'
-                },
-                {
-                    id: 'math9',
-                    question: 'Qual é a fórmula do logaritmo?',
-                    answer: 'logₐb = c significa que aᶜ = b, onde a é a base, b é o logaritmando e c é o logaritmo.',
-                    category: 'matematica',
-                    deckId: '2'
-                },
-                {
-                    id: 'math10',
-                    question: 'O que é a razão áurea?',
-                    answer: 'É uma constante irracional aproximadamente igual a 1.618, representada pela letra grega φ (phi).',
-                    category: 'matematica',
-                    deckId: '2'
-                },
-                {
-                    id: 'math11',
-                    question: 'Como se calcula a probabilidade de um evento?',
-                    answer: 'P(A) = número de casos favoráveis / número de casos possíveis.',
-                    category: 'matematica',
-                    deckId: '2'
-                },
-                {
-                    id: 'math12',
-                    question: 'O que é uma progressão aritmética?',
-                    answer: 'É uma sequência numérica onde a diferença entre termos consecutivos é constante, chamada de razão.',
-                    category: 'matematica',
-                    deckId: '2'
-                },
-
-                // CIÊNCIAS (12 flashcards)
-                {
-                    id: 'science1',
-                    question: 'O que é fotossíntese?',
-                    answer: 'É o processo pelo qual as plantas convertem luz solar, água e dióxido de carbono em glicose e oxigênio.',
-                    category: 'ciencias',
-                    deckId: '3'
-                },
-                {
-                    id: 'science2',
-                    question: 'Quais são os estados da matéria?',
-                    answer: 'Sólido, líquido, gasoso e plasma. Cada um com características específicas de forma e volume.',
-                    category: 'ciencias',
-                    deckId: '3'
-                },
-                {
-                    id: 'science3',
-                    question: 'O que é a lei da gravitação universal?',
-                    answer: 'Formulação de Newton que descreve a atração gravitacional entre corpos com massa no universo.',
-                    category: 'ciencias',
-                    deckId: '3'
-                },
-                {
-                    id: 'science4',
-                    question: 'Qual é a diferença entre elementos e compostos?',
-                    answer: 'Elementos são substâncias puras formadas por um único tipo de átomo. Compostos são formados por dois ou mais elementos quimicamente combinados.',
-                    category: 'ciencias',
-                    deckId: '3'
-                },
-                {
-                    id: 'science5',
-                    question: 'O que são células eucarióticas e procarióticas?',
-                    answer: 'Eucarióticas possuem núcleo definido e organelas membranosas. Procarióticas não possuem núcleo definido nem organelas membranosas.',
-                    category: 'ciencias',
-                    deckId: '3'
-                },
-                {
-                    id: 'science6',
-                    question: 'Qual é a função das mitocôndrias?',
-                    answer: 'São organelas responsáveis pela produção de energia (ATP) através da respiração celular.',
-                    category: 'ciencias',
-                    deckId: '3'
-                },
-                {
-                    id: 'science7',
-                    question: 'O que é o DNA?',
-                    answer: 'Ácido desoxirribonucleico, molécula que carrega a informação genética em todos os seres vivos.',
-                    category: 'ciencias',
-                    deckId: '3'
-                },
-                {
-                    id: 'science8',
-                    question: 'Quais são as três leis de Newton?',
-                    answer: '1ª: Lei da Inércia; 2ª: F = m × a; 3ª: Ação e reação.',
-                    category: 'ciencias',
-                    deckId: '3'
-                },
-                {
-                    id: 'science9',
-                    question: 'O que é a tabela periódica?',
-                    answer: 'Organização dos elementos químicos baseada em seu número atômico, configuração eletrônica e propriedades periódicas.',
-                    category: 'ciencias',
-                    deckId: '3'
-                },
-                {
-                    id: 'science10',
-                    question: 'Qual é a diferença entre clima e tempo?',
-                    answer: 'Tempo são as condições atmosféricas em um momento específico. Clima é o padrão médio do tempo em uma região por longos períodos.',
-                    category: 'ciencias',
-                    deckId: '3'
-                },
-                {
-                    id: 'science11',
-                    question: 'O que é evolução biológica?',
-                    answer: 'Processo de mudança nas características hereditárias das populações ao longo das gerações.',
-                    category: 'ciencias',
-                    deckId: '3'
-                },
-                {
-                    id: 'science12',
-                    question: 'Quais são os tipos de energia?',
-                    answer: 'Cinética, potencial, térmica, elétrica, química, nuclear, luminosa, sonora, entre outras.',
-                    category: 'ciencias',
-                    deckId: '3'
-                },
-
-                // HISTÓRIA (12 flashcards)
-                {
-                    id: 'history1',
-                    question: 'Quando ocorreu a Proclamação da República no Brasil?',
-                    answer: '15 de novembro de 1889, marcando o fim do Império e início da República.',
-                    category: 'historia',
-                    deckId: '4'
-                },
-                {
-                    id: 'history2',
-                    question: 'O que foi a Revolução Francesa?',
-                    answer: 'Movimento social e político ocorrido na França entre 1789-1799 que derrubou a monarquia absoluta.',
-                    category: 'historia',
-                    deckId: '4'
-                },
-                {
-                    id: 'history3',
-                    question: 'Quem foram os principais líderes da Segunda Guerra Mundial?',
-                    answer: 'Aliados: Churchill (UK), Roosevelt/Truman (EUA), Stalin (URSS). Eixo: Hitler (Alemanha), Mussolini (Itália), Hirohito (Japão).',
-                    category: 'historia',
-                    deckId: '4'
-                },
-                {
-                    id: 'history4',
-                    question: 'O que foi o Iluminismo?',
-                    answer: 'Movimento intelectual do século XVIII que defendia a razão, a liberdade e o progresso da humanidade.',
-                    category: 'historia',
-                    deckId: '4'
-                },
-                {
-                    id: 'history5',
-                    question: 'Quando começou e terminou a Primeira Guerra Mundial?',
-                    answer: '1914-1918. Conflito global desencadeado pelo assassinato do arquiduque Francisco Ferdinando.',
-                    category: 'historia',
-                    deckId: '4'
-                },
-                {
-                    id: 'history6',
-                    question: 'O que foi a Guerra Fria?',
-                    answer: 'Conflito ideológico, político e econômico entre EUA (capitalismo) e URSS (comunismo) de 1947-1991.',
-                    category: 'historia',
-                    deckId: '4'
-                },
-                {
-                    id: 'history7',
-                    question: 'Quem foi Getúlio Vargas?',
-                    answer: 'Presidente do Brasil por 15 anos (1930-1945 e 1951-1954), conhecido como "pai dos pobres".',
-                    category: 'historia',
-                    deckId: '4'
-                },
-                {
-                    id: 'history8',
-                    question: 'O que foi o Renascimento?',
-                    answer: 'Movimento cultural e artístico dos séculos XIV-XVI que marcou a transição da Idade Média para a Moderna.',
-                    category: 'historia',
-                    deckId: '4'
-                },
-                {
-                    id: 'history9',
-                    question: 'Quando ocorreu a Abolição da Escravatura no Brasil?',
-                    answer: '13 de maio de 1888, com a Lei Áurea assinada pela princesa Isabel.',
-                    category: 'historia',
-                    deckId: '4'
-                },
-                {
-                    id: 'history10',
-                    question: 'O que foi o Imperialismo?',
-                    answer: 'Expansão territorial e dominação de nações europeias sobre a África e Ásia no século XIX.',
-                    category: 'historia',
-                    deckId: '4'
-                },
-                {
-                    id: 'history11',
-                    question: 'Quem foram os bandeirantes?',
-                    answer: 'Exploradores portugueses e mestiços que expandiram o território brasileiro durante os séculos XVII e XVIII.',
-                    category: 'historia',
-                    deckId: '4'
-                },
-                {
-                    id: 'history12',
-                    question: 'O que foi a Inconfidência Mineira?',
-                    answer: 'Movimento separatista ocorrido em Minas Gerais em 1789, liderado por Tiradentes contra o domínio português.',
-                    category: 'historia',
-                    deckId: '4'
-                },
-
-                // INGLÊS (12 flashcards)
-                {
-                    id: 'english1',
-                    question: 'Qual é a diferença entre "there", "their" e "they\'re"?',
-                    answer: 'There = lá/ali (lugar); Their = deles/delas (possessivo); They\'re = they are (contração).',
-                    category: 'ingles',
-                    deckId: '5'
-                },
-                {
-                    id: 'english2',
-                    question: 'Como se forma o Present Perfect?',
-                    answer: 'Sujeito + have/has + past participle. Ex: I have studied, She has worked.',
-                    category: 'ingles',
-                    deckId: '5'
-                },
-                {
-                    id: 'english3',
-                    question: 'Qual é a diferença entre "much" e "many"?',
-                    answer: 'Much = usado com substantivos incontáveis; Many = usado com substantivos contáveis.',
-                    category: 'ingles',
-                    deckId: '5'
-                },
-                {
-                    id: 'english4',
-                    question: 'O que são "phrasal verbs"?',
-                    answer: 'Verbos compostos por um verbo principal + partícula (preposição ou advérbio) que mudam o significado original.',
-                    category: 'ingles',
-                    deckId: '5'
-                },
-                {
-                    id: 'english5',
-                    question: 'Como se usa "used to"?',
-                    answer: 'Expressa hábitos ou situações no passado que não ocorrem mais no presente.',
-                    category: 'ingles',
-                    deckId: '5'
-                },
-                {
-                    id: 'english6',
-                    question: 'Qual é a diferença entre "say" e "tell"?',
-                    answer: 'Say = dizer algo (não requer objeto indireto); Tell = contar/dizer a alguém (requer objeto indireto).',
-                    category: 'ingles',
-                    deckId: '5'
-                },
-                {
-                    id: 'english7',
-                    question: 'O que são "false friends"?',
-                    answer: 'Palavras que se parecem com palavras em português mas têm significados diferentes. Ex: "actually" = na verdade, não "atualmente".',
-                    category: 'ingles',
-                    deckId: '5'
-                },
-                {
-                    id: 'english8',
-                    question: 'Como se forma o Past Continuous?',
-                    answer: 'Sujeito + was/were + verbo + -ing. Ex: I was studying when she called.',
-                    category: 'ingles',
-                    deckId: '5'
-                },
-                {
-                    id: 'english9',
-                    question: 'Qual é a diferença entre "make" e "do"?',
-                    answer: 'Make = criar/produzir algo; Do = realizar/executar uma ação.',
-                    category: 'ingles',
-                    deckId: '5'
-                },
-                {
-                    id: 'english10',
-                    question: 'O que são "modal verbs"?',
-                    answer: 'Verbos auxiliares que expressam possibilidade, obrigação, permissão ou capacidade. Ex: can, could, may, might, must, should.',
-                    category: 'ingles',
-                    deckId: '5'
-                },
-                {
-                    id: 'english11',
-                    question: 'Como se usa o Second Conditional?',
-                    answer: 'If + past simple, would + base form. Usado para situações hipotéticas no presente/futuro.',
-                    category: 'ingles',
-                    deckId: '5'
-                },
-                {
-                    id: 'english12',
-                    question: 'Qual é a diferença entre "a" e "an"?',
-                    answer: 'A = antes de sons consonantais; An = antes de sons vocálicos. Ex: a university, an hour.',
-                    category: 'ingles',
-                    deckId: '5'
-                },
-
-                // PROGRAMAÇÃO (12 flashcards)
-                {
-                    id: 'prog1',
+                    id: '1',
                     question: 'O que é HTML?',
-                    answer: 'HTML é uma linguagem de marcação utilizada para criar páginas web. Ela define a estrutura e o conteúdo de um site.',
+                    answer: 'HTML é uma linguagem de marcação utilizada para criar páginas web.',
                     category: 'programacao',
                     deckId: '1'
                 },
                 {
-                    id: 'prog2',
-                    question: 'Qual é a diferença entre let, var e const em JavaScript?',
-                    answer: 'var: escopo de função, pode ser redeclarada; let: escopo de bloco, não pode ser redeclarada; const: escopo de bloco, não pode ser reatribuída.',
-                    category: 'programacao',
-                    deckId: '1'
+                    id: '2',
+                    question: 'Qual é a fórmula do Teorema de Pitágoras?',
+                    answer: 'a² = b² + c², onde a é a hipotenusa e b e c são os catetos.',
+                    category: 'matematica',
+                    deckId: '2'
                 },
                 {
-                    id: 'prog3',
-                    question: 'O que é CSS?',
-                    answer: 'CSS é uma linguagem de estilo usada para descrever a apresentação de documentos HTML, incluindo cores, layout e fontes.',
-                    category: 'programacao',
-                    deckId: '1'
-                },
-                {
-                    id: 'prog4',
-                    question: 'O que é um algoritmo?',
-                    answer: 'É uma sequência finita de instruções bem definidas para resolver um problema ou executar uma tarefa.',
-                    category: 'programacao',
-                    deckId: '1'
-                },
-                {
-                    id: 'prog5',
-                    question: 'Qual é a diferença entre front-end e back-end?',
-                    answer: 'Front-end: parte visual que interage com o usuário; Back-end: lógica do servidor e banco de dados.',
-                    category: 'programacao',
-                    deckId: '1'
-                },
-                {
-                    id: 'prog6',
-                    question: 'O que é Git?',
-                    answer: 'Sistema de controle de versão distribuído usado para rastrear mudanças no código fonte durante o desenvolvimento de software.',
-                    category: 'programacao',
-                    deckId: '1'
-                },
-                {
-                    id: 'prog7',
-                    question: 'O que é uma API?',
-                    answer: 'Interface de Programação de Aplicações - conjunto de regras que permite que diferentes softwares se comuniquem entre si.',
-                    category: 'programacao',
-                    deckId: '1'
-                },
-                {
-                    id: 'prog8',
-                    question: 'O que é SQL?',
-                    answer: 'Structured Query Language - linguagem padrão para gerenciar e manipular bancos de dados relacionais.',
-                    category: 'programacao',
-                    deckId: '1'
-                },
-                {
-                    id: 'prog9',
-                    question: 'O que é um framework?',
-                    answer: 'Conjunto de ferramentas e bibliotecas que fornece uma estrutura para desenvolver aplicações de software.',
-                    category: 'programacao',
-                    deckId: '1'
-                },
-                {
-                    id: 'prog10',
-                    question: 'O que é programação orientada a objetos?',
-                    answer: 'Paradigma de programação baseado no conceito de "objetos", que podem conter dados e código.',
-                    category: 'programacao',
-                    deckId: '1'
-                },
-                {
-                    id: 'prog11',
-                    question: 'O que é responsive design?',
-                    answer: 'Abordagem de design web que faz sites se adaptarem a diferentes tamanhos de tela e dispositivos.',
-                    category: 'programacao',
-                    deckId: '1'
-                },
-                {
-                    id: 'prog12',
-                    question: 'O que é debugging?',
-                    answer: 'Processo de encontrar e corrigir erros (bugs) em um programa de computador.',
-                    category: 'programacao',
-                    deckId: '1'
+                    id: '3',
+                    question: 'O que é fotossíntese?',
+                    answer: 'É o processo pelo qual as plantas convertem luz solar em energia química.',
+                    category: 'ciencias',
+                    deckId: '3'
                 }
             ];
             localStorage.setItem('flashstudy_flashcards', JSON.stringify(initialFlashcards));
@@ -502,41 +94,25 @@ class AuthSystem {
                 {
                     id: '1',
                     name: 'Programação Web',
-                    description: 'Conceitos fundamentais de desenvolvimento web e programação',
+                    description: 'Conceitos fundamentais de desenvolvimento web',
                     color: '#4361ee',
-                    cardCount: 12,
+                    cardCount: 1,
                     mastered: 0
                 },
                 {
                     id: '2',
-                    name: 'Matemática',
-                    description: 'Conceitos matemáticos fundamentais e avançados',
+                    name: 'Matemática Básica',
+                    description: 'Conceitos fundamentais de matemática',
                     color: '#f72585',
-                    cardCount: 12,
+                    cardCount: 1,
                     mastered: 0
                 },
                 {
                     id: '3',
-                    name: 'Ciências',
-                    description: 'Biologia, física, química e ciências naturais',
+                    name: 'Ciências Naturais',
+                    description: 'Biologia, química e física',
                     color: '#4cc9f0',
-                    cardCount: 12,
-                    mastered: 0
-                },
-                {
-                    id: '4',
-                    name: 'História',
-                    description: 'História mundial e do Brasil',
-                    color: '#7209b7',
-                    cardCount: 12,
-                    mastered: 0
-                },
-                {
-                    id: '5',
-                    name: 'Inglês',
-                    description: 'Gramática, vocabulário e expressões em inglês',
-                    color: '#ffba08',
-                    cardCount: 12,
+                    cardCount: 1,
                     mastered: 0
                 }
             ];
@@ -1046,13 +622,7 @@ function loadDecks() {
                     <i class="fas fa-trash"></i> Excluir
                 </button>
             </div>
-        `;O que é HTML?
-Linguagem de marcação web
-
-Teorema de Pitágoras
-a² = b² + c²
-
-
+        `;
         grid.appendChild(deckElement);
     });
 }

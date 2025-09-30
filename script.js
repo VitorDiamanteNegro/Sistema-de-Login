@@ -1046,7 +1046,13 @@ function loadDecks() {
                     <i class="fas fa-trash"></i> Excluir
                 </button>
             </div>
-        `;
+        `;O que é HTML?
+Linguagem de marcação web
+
+Teorema de Pitágoras
+a² = b² + c²
+
+
         grid.appendChild(deckElement);
     });
 }

@@ -81,7 +81,7 @@
                     <label for="signupEmail">
                         <i class="fas fa-envelope"></i> E-mail
                     </label>
-                        <input type="email" id="signupEmail" placeholder="seu@email.com" required>
+                    <input type="email" id="signupEmail" placeholder="seu@email.com" required>
                 </div>
                 <div class="form-group">
                     <label for="signupPassword">
@@ -297,9 +297,21 @@
                 </div>
 
                 <div class="flashcards-actions">
-                    <button class="btn btn-primary" onclick="showCreateFlashcardForm()">
-                        <i class="fas fa-plus"></i> Novo Flashcard
-                    </button>
+                    <div class="actions-left">
+                        <button class="btn btn-primary" onclick="showCreateFlashcardForm()">
+                            <i class="fas fa-plus"></i> Novo Flashcard
+                        </button>
+                        <div class="subject-selector">
+                            <select id="subjectSelector">
+                                <option value="todos">Todas as Matérias</option>
+                                <option value="programacao">Programação</option>
+                                <option value="matematica">Matemática</option>
+                                <option value="historia">História</option>
+                                <option value="ciencias">Ciências</option>
+                                <option value="ingles">Inglês</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="search-box">
                         <i class="fas fa-search"></i>
                         <input type="text" placeholder="Buscar flashcards..." id="searchFlashcards">
@@ -319,9 +331,9 @@
                             <textarea id="flashcardAnswer" placeholder="Digite a resposta..." rows="3"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="flashcardCategory">Categoria</label>
+                            <label for="flashcardCategory">Matéria</label>
                             <select id="flashcardCategory">
-                                <option value="">Selecione uma categoria</option>
+                                <option value="">Selecione uma matéria</option>
                                 <option value="programacao">Programação</option>
                                 <option value="matematica">Matemática</option>
                                 <option value="historia">História</option>
@@ -330,15 +342,15 @@
                             </select>
                         </div>
                         <div class="form-actions">
-                            <button class="btn btn-outline" onclick="hideCreateFlashcardForm()">Cancelar</button>
-                            <button class="btn btn-primary" onclick="addNewFlashcard()">Criar Flashcard</button>
+                            <button type="button" class="btn btn-outline" onclick="hideCreateFlashcardForm()">Cancelar</button>
+                            <button type="button" class="btn btn-primary" onclick="addNewFlashcard()">Criar Flashcard</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Grid de Flashcards -->
                 <div class="flashcards-grid" id="flashcardsGrid">
-                    <!-- Flashcards serão adicionados aqui dinamicamente -->
+                    <!-- Flashcards serão carregados aqui pelo JavaScript -->
                 </div>
 
                 <!-- Visualizador de Flashcard -->
@@ -363,10 +375,10 @@
                         </div>
                     </div>
                     <div class="viewer-actions">
-                        <button class="btn btn-outline" onclick="editFlashcard()">
+                        <button class="btn btn-outline" id="editFlashcardBtn">
                             <i class="fas fa-edit"></i> Editar
                         </button>
-                        <button class="btn btn-danger" onclick="deleteFlashcard()">
+                        <button class="btn btn-danger" id="deleteFlashcardBtn">
                             <i class="fas fa-trash"></i> Excluir
                         </button>
                     </div>
@@ -415,15 +427,15 @@
                             </div>
                         </div>
                         <div class="form-actions">
-                            <button class="btn btn-outline" onclick="hideCreateDeckForm()">Cancelar</button>
-                            <button class="btn btn-primary" onclick="addNewDeck()">Criar Baralho</button>
+                            <button type="button" class="btn btn-outline" onclick="hideCreateDeckForm()">Cancelar</button>
+                            <button type="button" class="btn btn-primary" onclick="addNewDeck()">Criar Baralho</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Grid de Baralhos -->
                 <div class="decks-grid" id="decksGrid">
-                    <!-- Baralhos serão adicionados aqui dinamicamente -->
+                    <!-- Baralhos serão carregados aqui pelo JavaScript -->
                 </div>
 
                 <!-- Visualização do Baralho -->

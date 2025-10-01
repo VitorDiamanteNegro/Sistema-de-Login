@@ -20,8 +20,8 @@ class AuthSystem {
         // Carregar dados iniciais
         this.loadInitialData();
         
-        // Inicializar seletor de matéria
-        this.initializeSubjectSelector();
+        // Inicializar funcionalidades
+        this.initializeFeatures();
     }
 
     setupEventListeners() {
@@ -61,19 +61,26 @@ class AuthSystem {
         document.getElementById('heroSignupBtn').addEventListener('click', () => {
             this.openModal('signup');
         });
-
-        // Busca de flashcards
-        document.getElementById('searchFlashcards').addEventListener('input', (e) => {
-            this.searchFlashcards(e.target.value);
-        });
-
-        // Busca de baralhos
-        document.getElementById('searchDecks').addEventListener('input', (e) => {
-            this.searchDecks(e.target.value);
-        });
     }
 
-    initializeSubjectSelector() {
+    initializeFeatures() {
+        // Busca de flashcards
+        const searchFlashcards = document.getElementById('searchFlashcards');
+        if (searchFlashcards) {
+            searchFlashcards.addEventListener('input', (e) => {
+                this.searchFlashcards(e.target.value);
+            });
+        }
+
+        // Busca de baralhos
+        const searchDecks = document.getElementById('searchDecks');
+        if (searchDecks) {
+            searchDecks.addEventListener('input', (e) => {
+                this.searchDecks(e.target.value);
+            });
+        }
+
+        // Seletor de matéria
         const subjectSelector = document.getElementById('subjectSelector');
         if (subjectSelector) {
             subjectSelector.addEventListener('change', (e) => {
@@ -83,60 +90,15 @@ class AuthSystem {
     }
 
     loadInitialData() {
-        // Carregar flashcards e baralhos do localStorage
+        // Carregar flashcards do localStorage ou criar dados iniciais
         if (!localStorage.getItem('flashstudy_flashcards')) {
             const initialFlashcards = this.getInitialFlashcards();
             localStorage.setItem('flashstudy_flashcards', JSON.stringify(initialFlashcards));
         }
 
+        // Carregar baralhos do localStorage ou criar dados iniciais
         if (!localStorage.getItem('flashstudy_decks')) {
-            const initialDecks = [
-                {
-                    id: '1',
-                    name: 'Programação Web',
-                    description: 'Conceitos fundamentais de desenvolvimento web',
-                    color: '#4361ee',
-                    cardCount: 10,
-                    mastered: 0,
-                    subject: 'programacao'
-                },
-                {
-                    id: '2',
-                    name: 'Matemática Básica',
-                    description: 'Conceitos fundamentais de matemática',
-                    color: '#f72585',
-                    cardCount: 10,
-                    mastered: 0,
-                    subject: 'matematica'
-                },
-                {
-                    id: '3',
-                    name: 'História do Brasil',
-                    description: 'Principais eventos da história brasileira',
-                    color: '#4cc9f0',
-                    cardCount: 10,
-                    mastered: 0,
-                    subject: 'historia'
-                },
-                {
-                    id: '4',
-                    name: 'Ciências Naturais',
-                    description: 'Biologia, química e física',
-                    color: '#7209b7',
-                    cardCount: 10,
-                    mastered: 0,
-                    subject: 'ciencias'
-                },
-                {
-                    id: '5',
-                    name: 'Inglês Básico',
-                    description: 'Vocabulário e gramática essenciais',
-                    color: '#ffba08',
-                    cardCount: 10,
-                    mastered: 0,
-                    subject: 'ingles'
-                }
-            ];
+            const initialDecks = this.getInitialDecks();
             localStorage.setItem('flashstudy_decks', JSON.stringify(initialDecks));
         }
     }
@@ -145,7 +107,7 @@ class AuthSystem {
         return [
             // PROGRAMACAO - 10 flashcards
             {
-                id: 'prog1',
+                id: '1',
                 question: 'O que é HTML?',
                 answer: 'HTML é uma linguagem de marcação utilizada para criar páginas web.',
                 category: 'programacao',
@@ -154,7 +116,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'prog2',
+                id: '2',
                 question: 'Qual a diferença entre let e var em JavaScript?',
                 answer: 'let tem escopo de bloco, enquanto var tem escopo de função.',
                 category: 'programacao',
@@ -163,7 +125,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'prog3',
+                id: '3',
                 question: 'O que é CSS?',
                 answer: 'CSS é uma linguagem de estilo usada para descrever a apresentação de documentos HTML.',
                 category: 'programacao',
@@ -172,7 +134,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'prog4',
+                id: '4',
                 question: 'O que é uma API?',
                 answer: 'API é uma interface que permite comunicação entre diferentes sistemas de software.',
                 category: 'programacao',
@@ -181,7 +143,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'prog5',
+                id: '5',
                 question: 'O que é Git?',
                 answer: 'Git é um sistema de controle de versão distribuído para rastrear mudanças no código.',
                 category: 'programacao',
@@ -190,7 +152,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'prog6',
+                id: '6',
                 question: 'O que é React?',
                 answer: 'React é uma biblioteca JavaScript para construir interfaces de usuário.',
                 category: 'programacao',
@@ -199,7 +161,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'prog7',
+                id: '7',
                 question: 'O que é um banco de dados relacional?',
                 answer: 'É um banco que organiza dados em tabelas com relações entre elas.',
                 category: 'programacao',
@@ -208,7 +170,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'prog8',
+                id: '8',
                 question: 'O que é POO?',
                 answer: 'Programação Orientada a Objetos, paradigma baseado em objetos e classes.',
                 category: 'programacao',
@@ -217,7 +179,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'prog9',
+                id: '9',
                 question: 'O que é npm?',
                 answer: 'Node Package Manager, gerenciador de pacotes do Node.js.',
                 category: 'programacao',
@@ -226,7 +188,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'prog10',
+                id: '10',
                 question: 'O que é um framework?',
                 answer: 'É uma estrutura que fornece funcionalidades básicas para desenvolvimento.',
                 category: 'programacao',
@@ -237,7 +199,7 @@ class AuthSystem {
 
             // MATEMATICA - 10 flashcards
             {
-                id: 'mat1',
+                id: '11',
                 question: 'Qual é a fórmula do Teorema de Pitágoras?',
                 answer: 'a² = b² + c², onde a é a hipotenusa e b e c são os catetos.',
                 category: 'matematica',
@@ -246,7 +208,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'mat2',
+                id: '12',
                 question: 'O que é uma equação do segundo grau?',
                 answer: 'É uma equação na forma ax² + bx + c = 0, onde a ≠ 0.',
                 category: 'matematica',
@@ -255,7 +217,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'mat3',
+                id: '13',
                 question: 'Como calcular a área de um círculo?',
                 answer: 'A = π × r², onde r é o raio do círculo.',
                 category: 'matematica',
@@ -264,7 +226,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'mat4',
+                id: '14',
                 question: 'O que são números primos?',
                 answer: 'São números maiores que 1 divisíveis apenas por 1 e por eles mesmos.',
                 category: 'matematica',
@@ -273,7 +235,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'mat5',
+                id: '15',
                 question: 'Como calcular o perímetro de um quadrado?',
                 answer: 'P = 4 × lado',
                 category: 'matematica',
@@ -282,7 +244,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'mat6',
+                id: '16',
                 question: 'O que é uma fração?',
                 answer: 'É uma representação de uma parte de um todo, na forma a/b.',
                 category: 'matematica',
@@ -291,7 +253,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'mat7',
+                id: '17',
                 question: 'Como converter decimal em porcentagem?',
                 answer: 'Multiplicar por 100 e adicionar o símbolo %.',
                 category: 'matematica',
@@ -300,7 +262,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'mat8',
+                id: '18',
                 question: 'O que é média aritmética?',
                 answer: 'Soma de todos os valores dividida pelo número de valores.',
                 category: 'matematica',
@@ -309,7 +271,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'mat9',
+                id: '19',
                 question: 'Como calcular juros simples?',
                 answer: 'J = C × i × t, onde C=capital, i=taxa, t=tempo.',
                 category: 'matematica',
@@ -318,7 +280,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'mat10',
+                id: '20',
                 question: 'O que é um número inteiro?',
                 answer: 'São números sem parte decimal, positivos, negativos ou zero.',
                 category: 'matematica',
@@ -329,7 +291,7 @@ class AuthSystem {
 
             // HISTORIA - 10 flashcards
             {
-                id: 'hist1',
+                id: '21',
                 question: 'Quando foi proclamada a Independência do Brasil?',
                 answer: '7 de setembro de 1822.',
                 category: 'historia',
@@ -338,7 +300,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'hist2',
+                id: '22',
                 question: 'Quem foi Dom Pedro I?',
                 answer: 'Primeiro imperador do Brasil, proclamou a independência.',
                 category: 'historia',
@@ -347,7 +309,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'hist3',
+                id: '23',
                 question: 'O que foi a Inconfidência Mineira?',
                 answer: 'Movimento separatista em Minas Gerais em 1789.',
                 category: 'historia',
@@ -356,7 +318,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'hist4',
+                id: '24',
                 question: 'Quando ocorreu a Proclamação da República?',
                 answer: '15 de novembro de 1889.',
                 category: 'historia',
@@ -365,7 +327,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'hist5',
+                id: '25',
                 question: 'Quem foi Tiradentes?',
                 answer: 'Joaquim José da Silva Xavier, mártir da Inconfidência Mineira.',
                 category: 'historia',
@@ -374,7 +336,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'hist6',
+                id: '26',
                 question: 'O que foi o período do Brasil Colônia?',
                 answer: 'De 1500 a 1822, quando Brasil era colônia de Portugal.',
                 category: 'historia',
@@ -383,7 +345,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'hist7',
+                id: '27',
                 question: 'Quem foi Zumbi dos Palmares?',
                 answer: 'Líder do Quilombo dos Palmares, símbolo da resistência negra.',
                 category: 'historia',
@@ -392,7 +354,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'hist8',
+                id: '28',
                 question: 'O que foi a Era Vargas?',
                 answer: 'Período de governo de Getúlio Vargas (1930-1945 e 1951-1954).',
                 category: 'historia',
@@ -401,7 +363,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'hist9',
+                id: '29',
                 question: 'Quando terminou a Ditadura Militar no Brasil?',
                 answer: '1985, com a eleição de Tancredo Neves.',
                 category: 'historia',
@@ -410,7 +372,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'hist10',
+                id: '30',
                 question: 'O que foi a Revolução de 1930?',
                 answer: 'Movimento que levou Getúlio Vargas ao poder, fim da República Velha.',
                 category: 'historia',
@@ -421,7 +383,7 @@ class AuthSystem {
 
             // CIENCIAS - 10 flashcards
             {
-                id: 'cien1',
+                id: '31',
                 question: 'O que é fotossíntese?',
                 answer: 'Processo pelo qual plantas convertem luz solar em energia química.',
                 category: 'ciencias',
@@ -430,7 +392,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'cien2',
+                id: '32',
                 question: 'Quais são os estados da matéria?',
                 answer: 'Sólido, líquido, gasoso e plasma.',
                 category: 'ciencias',
@@ -439,7 +401,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'cien3',
+                id: '33',
                 question: 'O que é DNA?',
                 answer: 'Ácido desoxirribonucleico, molécula que carrega informação genética.',
                 category: 'ciencias',
@@ -448,7 +410,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'cien4',
+                id: '34',
                 question: 'Como funciona a gravidade?',
                 answer: 'Força de atração entre objetos com massa.',
                 category: 'ciencias',
@@ -457,7 +419,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'cien5',
+                id: '35',
                 question: 'O que são células?',
                 answer: 'Unidade básica estrutural e funcional dos seres vivos.',
                 category: 'ciencias',
@@ -466,7 +428,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'cien6',
+                id: '36',
                 question: 'O que é a tabela periódica?',
                 answer: 'Organização dos elementos químicos baseada em suas propriedades.',
                 category: 'ciencias',
@@ -475,7 +437,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'cien7',
+                id: '37',
                 question: 'O que é evolução?',
                 answer: 'Processo de mudança nas espécies ao longo do tempo.',
                 category: 'ciencias',
@@ -484,7 +446,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'cien8',
+                id: '38',
                 question: 'Como funciona o sistema solar?',
                 answer: 'Sol no centro, planetas orbitando devido à gravidade.',
                 category: 'ciencias',
@@ -493,7 +455,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'cien9',
+                id: '39',
                 question: 'O que é energia renovável?',
                 answer: 'Energia de fontes naturais que se regeneram, como solar e eólica.',
                 category: 'ciencias',
@@ -502,7 +464,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'cien10',
+                id: '40',
                 question: 'O que é ecossistema?',
                 answer: 'Comunidade de organismos e seu ambiente físico interagindo.',
                 category: 'ciencias',
@@ -513,7 +475,7 @@ class AuthSystem {
 
             // INGLES - 10 flashcards
             {
-                id: 'ing1',
+                id: '41',
                 question: 'Como se diz "obrigado" em inglês?',
                 answer: 'Thank you',
                 category: 'ingles',
@@ -522,7 +484,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'ing2',
+                id: '42',
                 question: 'Qual é a diferença entre "do" e "make"?',
                 answer: '"Do" para atividades, "make" para criar ou produzir.',
                 category: 'ingles',
@@ -531,7 +493,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'ing3',
+                id: '43',
                 question: 'Como conjugar o verbo "to be" no presente?',
                 answer: 'I am, you are, he/she/it is, we are, they are.',
                 category: 'ingles',
@@ -540,7 +502,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'ing4',
+                id: '44',
                 question: 'O que significa "however"?',
                 answer: 'Contudo, no entanto.',
                 category: 'ingles',
@@ -549,7 +511,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'ing5',
+                id: '45',
                 question: 'Como formar o plural em inglês?',
                 answer: 'Geralmente adiciona-se "s", mas há exceções como "children".',
                 category: 'ingles',
@@ -558,7 +520,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'ing6',
+                id: '46',
                 question: 'Qual é a estrutura básica de uma frase em inglês?',
                 answer: 'Sujeito + Verbo + Objeto',
                 category: 'ingles',
@@ -567,7 +529,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'ing7',
+                id: '47',
                 question: 'O que são "phrasal verbs"?',
                 answer: 'Verbos compostos por verbo + preposição/advérbio com significado próprio.',
                 category: 'ingles',
@@ -576,7 +538,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'ing8',
+                id: '48',
                 question: 'Como usar "a" e "an"?',
                 answer: '"a" antes de consoantes, "an" antes de vogais.',
                 category: 'ingles',
@@ -585,7 +547,7 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'ing9',
+                id: '49',
                 question: 'Qual a diferença entre "much" e "many"?',
                 answer: '"much" para incontáveis, "many" para contáveis.',
                 category: 'ingles',
@@ -594,12 +556,67 @@ class AuthSystem {
                 createdAt: new Date().toISOString()
             },
             {
-                id: 'ing10',
+                id: '50',
                 question: 'Como formar o passado simples?',
                 answer: 'Verbos regulares: +ed. Irregulares: forma específica.',
                 category: 'ingles',
                 subject: 'ingles',
                 deckId: '5',
+                createdAt: new Date().toISOString()
+            }
+        ];
+    }
+
+    getInitialDecks() {
+        return [
+            {
+                id: '1',
+                name: 'Programação Web',
+                description: 'Conceitos fundamentais de desenvolvimento web',
+                color: '#4361ee',
+                cardCount: 10,
+                mastered: 0,
+                subject: 'programacao',
+                createdAt: new Date().toISOString()
+            },
+            {
+                id: '2',
+                name: 'Matemática Básica',
+                description: 'Conceitos fundamentais de matemática',
+                color: '#f72585',
+                cardCount: 10,
+                mastered: 0,
+                subject: 'matematica',
+                createdAt: new Date().toISOString()
+            },
+            {
+                id: '3',
+                name: 'História do Brasil',
+                description: 'Principais eventos da história brasileira',
+                color: '#4cc9f0',
+                cardCount: 10,
+                mastered: 0,
+                subject: 'historia',
+                createdAt: new Date().toISOString()
+            },
+            {
+                id: '4',
+                name: 'Ciências Naturais',
+                description: 'Biologia, química e física',
+                color: '#7209b7',
+                cardCount: 10,
+                mastered: 0,
+                subject: 'ciencias',
+                createdAt: new Date().toISOString()
+            },
+            {
+                id: '5',
+                name: 'Inglês Básico',
+                description: 'Vocabulário e gramática essenciais',
+                color: '#ffba08',
+                cardCount: 10,
+                mastered: 0,
+                subject: 'ingles',
                 createdAt: new Date().toISOString()
             }
         ];
@@ -778,8 +795,8 @@ class AuthSystem {
 
     loadUserData() {
         // Carregar flashcards e baralhos
-        loadFlashcards();
-        loadDecks();
+        this.loadFlashcards();
+        this.loadDecks();
     }
 
     updatePasswordStrength(password) {
@@ -819,10 +836,14 @@ class AuthSystem {
                 break;
         }
 
-        strengthBar.style.width = `${strength * 20}%`;
-        strengthBar.style.background = color;
-        strengthValue.textContent = text;
-        strengthValue.style.color = color;
+        if (strengthBar) {
+            strengthBar.style.width = `${strength * 20}%`;
+            strengthBar.style.background = color;
+        }
+        if (strengthValue) {
+            strengthValue.textContent = text;
+            strengthValue.style.color = color;
+        }
     }
 
     checkPasswordMatch() {
@@ -832,25 +853,57 @@ class AuthSystem {
         const matchText = document.querySelector('.match-text');
 
         if (confirmPassword === '') {
-            checkIcon.style.display = 'none';
-            matchText.textContent = '';
+            if (checkIcon) checkIcon.style.display = 'none';
+            if (matchText) matchText.textContent = '';
             return;
         }
 
         if (password === confirmPassword) {
-            checkIcon.style.display = 'inline';
-            matchText.textContent = 'Senhas coincidem';
-            matchText.style.color = '#43aa8b';
+            if (checkIcon) checkIcon.style.display = 'inline';
+            if (matchText) {
+                matchText.textContent = 'Senhas coincidem';
+                matchText.style.color = '#43aa8b';
+            }
         } else {
-            checkIcon.style.display = 'none';
-            matchText.textContent = 'Senhas não coincidem';
-            matchText.style.color = '#f94144';
+            if (checkIcon) checkIcon.style.display = 'none';
+            if (matchText) {
+                matchText.textContent = 'Senhas não coincidem';
+                matchText.style.color = '#f94144';
+            }
         }
+    }
+
+    loadFlashcards() {
+        const flashcards = JSON.parse(localStorage.getItem('flashstudy_flashcards')) || [];
+        const grid = document.getElementById('flashcardsGrid');
+        
+        if (!grid) return;
+        
+        grid.innerHTML = '';
+        
+        if (flashcards.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-layer-group"></i>
+                    <h3>Nenhum flashcard encontrado</h3>
+                    <p>Crie seu primeiro flashcard para começar a estudar!</p>
+                    <button class="btn btn-primary" onclick="showCreateFlashcardForm()">
+                        <i class="fas fa-plus"></i> Criar Primeiro Flashcard
+                    </button>
+                </div>
+            `;
+            return;
+        }
+        
+        // Carregar todos os flashcards inicialmente
+        this.filterFlashcardsBySubject('todos');
     }
 
     filterFlashcardsBySubject(subject) {
         const flashcards = JSON.parse(localStorage.getItem('flashstudy_flashcards')) || [];
         const grid = document.getElementById('flashcardsGrid');
+        
+        if (!grid) return;
         
         grid.innerHTML = '';
         
@@ -909,6 +962,8 @@ class AuthSystem {
         const subjectSelector = document.getElementById('subjectSelector');
         const selectedSubject = subjectSelector ? subjectSelector.value : 'todos';
         
+        if (!grid) return;
+        
         grid.innerHTML = '';
         
         let filteredFlashcards = flashcards.filter(flashcard => 
@@ -961,9 +1016,67 @@ class AuthSystem {
         });
     }
 
+    loadDecks() {
+        const decks = JSON.parse(localStorage.getItem('flashstudy_decks')) || [];
+        const grid = document.getElementById('decksGrid');
+        
+        if (!grid) return;
+        
+        grid.innerHTML = '';
+        
+        if (decks.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>Nenhum baralho encontrado</h3>
+                    <p>Crie seu primeiro baralho para organizar seus flashcards!</p>
+                    <button class="btn btn-primary" onclick="showCreateDeckForm()">
+                        <i class="fas fa-plus"></i> Criar Primeiro Baralho
+                    </button>
+                </div>
+            `;
+            return;
+        }
+        
+        decks.forEach(deck => {
+            const progress = deck.cardCount > 0 ? Math.round((deck.mastered / deck.cardCount) * 100) : 0;
+            
+            const deckElement = document.createElement('div');
+            deckElement.className = 'deck-item';
+            deckElement.style.borderLeftColor = deck.color;
+            deckElement.innerHTML = `
+                <div class="deck-header">
+                    <div>
+                        <div class="deck-title">${deck.name}</div>
+                        <div class="deck-description">${deck.description}</div>
+                    </div>
+                    <div class="deck-color" style="background: ${deck.color}"></div>
+                </div>
+                <div class="deck-stats-small">
+                    <span><i class="fas fa-layer-group"></i> ${deck.cardCount} cards</span>
+                    <span><i class="fas fa-check-circle"></i> ${progress}% dominado</span>
+                </div>
+                <div class="deck-actions">
+                    <button class="btn btn-outline btn-sm" onclick="viewDeck('${deck.id}')">
+                        <i class="fas fa-eye"></i> Ver
+                    </button>
+                    <button class="btn btn-outline btn-sm" onclick="editDeck('${deck.id}')">
+                        <i class="fas fa-edit"></i> Editar
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteDeck('${deck.id}')">
+                        <i class="fas fa-trash"></i> Excluir
+                    </button>
+                </div>
+            `;
+            grid.appendChild(deckElement);
+        });
+    }
+
     searchDecks(query) {
         const decks = JSON.parse(localStorage.getItem('flashstudy_decks')) || [];
         const grid = document.getElementById('decksGrid');
+        
+        if (!grid) return;
         
         grid.innerHTML = '';
         
@@ -1034,8 +1147,10 @@ class AuthSystem {
         document.body.style.overflow = 'auto';
         
         // Limpar formulários
-        document.getElementById('loginForm').reset();
-        document.getElementById('signupForm').reset();
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        if (loginForm) loginForm.reset();
+        if (signupForm) signupForm.reset();
         this.updatePasswordStrength('');
         this.checkPasswordMatch();
     }
@@ -1100,63 +1215,29 @@ function showSection(sectionId) {
     if (targetSection) {
         targetSection.classList.add('active-section');
         targetSection.scrollIntoView({ behavior: 'smooth' });
+        
+        // Carregar dados específicos da seção
+        if (sectionId === 'flashcards' && authSystem.currentUser) {
+            authSystem.loadFlashcards();
+        } else if (sectionId === 'decks' && authSystem.currentUser) {
+            authSystem.loadDecks();
+        }
     }
 }
 
 // Sistema de Flashcards
-function loadFlashcards() {
-    const flashcards = JSON.parse(localStorage.getItem('flashstudy_flashcards')) || [];
-    const grid = document.getElementById('flashcardsGrid');
-    
-    grid.innerHTML = '';
-    
-    if (flashcards.length === 0) {
-        grid.innerHTML = `
-            <div class="empty-state">
-                <i class="fas fa-layer-group"></i>
-                <h3>Nenhum flashcard encontrado</h3>
-                <p>Crie seu primeiro flashcard para começar a estudar!</p>
-                <button class="btn btn-primary" onclick="showCreateFlashcardForm()">
-                    <i class="fas fa-plus"></i> Criar Primeiro Flashcard
-                </button>
-            </div>
-        `;
-        return;
-    }
-    
-    // Adicionar seletor de matéria se não existir
-    const actionsContainer = document.querySelector('.flashcards-actions');
-    if (!document.getElementById('subjectSelector')) {
-        const subjectSelectorHTML = `
-            <div class="subject-selector">
-                <select id="subjectSelector">
-                    <option value="todos">Todas as Matérias</option>
-                    <option value="programacao">Programação</option>
-                    <option value="matematica">Matemática</option>
-                    <option value="historia">História</option>
-                    <option value="ciencias">Ciências</option>
-                    <option value="ingles">Inglês</option>
-                </select>
-            </div>
-        `;
-        actionsContainer.insertAdjacentHTML('afterbegin', subjectSelectorHTML);
-        
-        // Configurar evento do seletor
-        document.getElementById('subjectSelector').addEventListener('change', (e) => {
-            authSystem.filterFlashcardsBySubject(e.target.value);
-        });
-    }
-    
-    // Carregar todos os flashcards inicialmente
-    authSystem.filterFlashcardsBySubject('todos');
-}
-
 function showCreateFlashcardForm() {
     document.getElementById('createFlashcardForm').style.display = 'block';
 }
 
 function hideCreateFlashcardForm() {
     document.getElementById('createFlashcardForm').style.display = 'none';
+    // Restaurar comportamento padrão do botão
+    const createBtn = document.querySelector('#createFlashcardForm .btn-primary');
+    if (createBtn) {
+        createBtn.textContent = 'Criar Flashcard';
+        createBtn.onclick = addNewFlashcard;
+    }
 }
 
 function addNewFlashcard() {
@@ -1184,7 +1265,7 @@ function addNewFlashcard() {
     localStorage.setItem('flashstudy_flashcards', JSON.stringify(flashcards));
     
     hideCreateFlashcardForm();
-    loadFlashcards();
+    authSystem.loadFlashcards();
     authSystem.showNotification('Flashcard criado com sucesso!', 'success');
     
     // Limpar formulário
@@ -1214,11 +1295,15 @@ function viewFlashcard(flashcardId) {
         document.getElementById('flashcardViewer').style.display = 'block';
         
         // Configurar botões de ação
-        const editBtn = document.querySelector('.viewer-actions .btn-outline');
-        const deleteBtn = document.querySelector('.viewer-actions .btn-danger');
+        const editBtn = document.getElementById('editFlashcardBtn');
+        const deleteBtn = document.getElementById('deleteFlashcardBtn');
         
-        editBtn.onclick = () => editFlashcard(flashcardId);
-        deleteBtn.onclick = () => deleteFlashcard(flashcardId);
+        if (editBtn) {
+            editBtn.onclick = () => editFlashcard(flashcardId);
+        }
+        if (deleteBtn) {
+            deleteBtn.onclick = () => deleteFlashcard(flashcardId);
+        }
     }
 }
 
@@ -1246,8 +1331,10 @@ function editFlashcard(flashcardId) {
         
         // Alterar comportamento do botão para atualizar
         const createBtn = document.querySelector('#createFlashcardForm .btn-primary');
-        createBtn.textContent = 'Atualizar Flashcard';
-        createBtn.onclick = () => updateFlashcard(flashcardId);
+        if (createBtn) {
+            createBtn.textContent = 'Atualizar Flashcard';
+            createBtn.onclick = () => updateFlashcard(flashcardId);
+        }
         
         closeFlashcardViewer();
     }
@@ -1277,13 +1364,8 @@ function updateFlashcard(flashcardId) {
         
         localStorage.setItem('flashstudy_flashcards', JSON.stringify(flashcards));
         hideCreateFlashcardForm();
-        loadFlashcards();
+        authSystem.loadFlashcards();
         authSystem.showNotification('Flashcard atualizado com sucesso!', 'success');
-        
-        // Restaurar comportamento padrão do botão
-        const createBtn = document.querySelector('#createFlashcardForm .btn-primary');
-        createBtn.textContent = 'Criar Flashcard';
-        createBtn.onclick = addNewFlashcard;
     }
 }
 
@@ -1294,72 +1376,24 @@ function deleteFlashcard(flashcardId) {
         
         localStorage.setItem('flashstudy_flashcards', JSON.stringify(updatedFlashcards));
         closeFlashcardViewer();
-        loadFlashcards();
+        authSystem.loadFlashcards();
         authSystem.showNotification('Flashcard excluído com sucesso!', 'success');
     }
 }
 
 // Sistema de Baralhos
-function loadDecks() {
-    const decks = JSON.parse(localStorage.getItem('flashstudy_decks')) || [];
-    const grid = document.getElementById('decksGrid');
-    
-    grid.innerHTML = '';
-    
-    if (decks.length === 0) {
-        grid.innerHTML = `
-            <div class="empty-state">
-                <i class="fas fa-folder-open"></i>
-                <h3>Nenhum baralho encontrado</h3>
-                <p>Crie seu primeiro baralho para organizar seus flashcards!</p>
-                <button class="btn btn-primary" onclick="showCreateDeckForm()">
-                    <i class="fas fa-plus"></i> Criar Primeiro Baralho
-                </button>
-            </div>
-        `;
-        return;
-    }
-    
-    decks.forEach(deck => {
-        const progress = deck.cardCount > 0 ? Math.round((deck.mastered / deck.cardCount) * 100) : 0;
-        
-        const deckElement = document.createElement('div');
-        deckElement.className = 'deck-item';
-        deckElement.style.borderLeftColor = deck.color;
-        deckElement.innerHTML = `
-            <div class="deck-header">
-                <div>
-                    <div class="deck-title">${deck.name}</div>
-                    <div class="deck-description">${deck.description}</div>
-                </div>
-                <div class="deck-color" style="background: ${deck.color}"></div>
-            </div>
-            <div class="deck-stats-small">
-                <span><i class="fas fa-layer-group"></i> ${deck.cardCount} cards</span>
-                <span><i class="fas fa-check-circle"></i> ${progress}% dominado</span>
-            </div>
-            <div class="deck-actions">
-                <button class="btn btn-outline btn-sm" onclick="viewDeck('${deck.id}')">
-                    <i class="fas fa-eye"></i> Ver
-                </button>
-                <button class="btn btn-outline btn-sm" onclick="editDeck('${deck.id}')">
-                    <i class="fas fa-edit"></i> Editar
-                </button>
-                <button class="btn btn-danger btn-sm" onclick="deleteDeck('${deck.id}')">
-                    <i class="fas fa-trash"></i> Excluir
-                </button>
-            </div>
-        `;
-        grid.appendChild(deckElement);
-    });
-}
-
 function showCreateDeckForm() {
     document.getElementById('createDeckForm').style.display = 'block';
 }
 
 function hideCreateDeckForm() {
     document.getElementById('createDeckForm').style.display = 'none';
+    // Restaurar comportamento padrão do botão
+    const createBtn = document.querySelector('#createDeckForm .btn-primary');
+    if (createBtn) {
+        createBtn.textContent = 'Criar Baralho';
+        createBtn.onclick = addNewDeck;
+    }
 }
 
 function addNewDeck() {
@@ -1388,7 +1422,7 @@ function addNewDeck() {
     localStorage.setItem('flashstudy_decks', JSON.stringify(decks));
     
     hideCreateDeckForm();
-    loadDecks();
+    authSystem.loadDecks();
     authSystem.showNotification('Baralho criado com sucesso!', 'success');
     
     // Limpar formulário
@@ -1461,8 +1495,10 @@ function editDeck(deckId) {
         
         // Alterar comportamento do botão para atualizar
         const createBtn = document.querySelector('#createDeckForm .btn-primary');
-        createBtn.textContent = 'Atualizar Baralho';
-        createBtn.onclick = () => updateDeck(deckId);
+        if (createBtn) {
+            createBtn.textContent = 'Atualizar Baralho';
+            createBtn.onclick = () => updateDeck(deckId);
+        }
     }
 }
 
@@ -1489,13 +1525,8 @@ function updateDeck(deckId) {
         
         localStorage.setItem('flashstudy_decks', JSON.stringify(decks));
         hideCreateDeckForm();
-        loadDecks();
+        authSystem.loadDecks();
         authSystem.showNotification('Baralho atualizado com sucesso!', 'success');
-        
-        // Restaurar comportamento padrão do botão
-        const createBtn = document.querySelector('#createDeckForm .btn-primary');
-        createBtn.textContent = 'Criar Baralho';
-        createBtn.onclick = addNewDeck;
     }
 }
 
@@ -1505,7 +1536,7 @@ function deleteDeck(deckId) {
         const updatedDecks = decks.filter(d => d.id !== deckId);
         
         localStorage.setItem('flashstudy_decks', JSON.stringify(updatedDecks));
-        loadDecks();
+        authSystem.loadDecks();
         authSystem.showNotification('Baralho excluído com sucesso!', 'success');
     }
 }
@@ -1573,7 +1604,7 @@ document.addEventListener('click', (e) => {
     const dropdown = document.getElementById('userDropdown');
     const userInfo = document.querySelector('.user-info');
     
-    if (!userInfo.contains(e.target) && dropdown.classList.contains('show')) {
+    if (userInfo && !userInfo.contains(e.target) && dropdown.classList.contains('show')) {
         dropdown.classList.remove('show');
     }
 });
@@ -1611,26 +1642,37 @@ document.querySelectorAll('.switch-to-login').forEach(link => {
 });
 
 // Fechar notificação
-document.querySelector('.notification-close').addEventListener('click', () => {
-    document.getElementById('notification').classList.add('hidden');
-});
+const notificationClose = document.querySelector('.notification-close');
+if (notificationClose) {
+    notificationClose.addEventListener('click', () => {
+        document.getElementById('notification').classList.add('hidden');
+    });
+}
 
 // Fechar com ESC
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         authSystem.closeModal();
-        document.getElementById('userDropdown').classList.remove('show');
+        const dropdown = document.getElementById('userDropdown');
+        if (dropdown) dropdown.classList.remove('show');
     }
 });
 
 // Botões do header
-document.getElementById('loginBtn').addEventListener('click', () => {
-    authSystem.openModal('login');
-});
+const loginBtn = document.getElementById('loginBtn');
+const signupBtn = document.getElementById('signupBtn');
 
-document.getElementById('signupBtn').addEventListener('click', () => {
-    authSystem.openModal('signup');
-});
+if (loginBtn) {
+    loginBtn.addEventListener('click', () => {
+        authSystem.openModal('login');
+    });
+}
+
+if (signupBtn) {
+    signupBtn.addEventListener('click', () => {
+        authSystem.openModal('signup');
+    });
+}
 
 // Inicializar sistema
 const authSystem = new AuthSystem();

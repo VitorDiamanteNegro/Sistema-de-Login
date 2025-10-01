@@ -1579,7 +1579,7 @@ function redirectToFlashcards() {
     showRedirectingScreen();
     
     // URL do seu site de flashcards
-    const baseUrl = 'https://vitordiamantenegro.github.io/TCC/';
+    const baseUrl = 'https://vitordiamantenegro.github.io/TCC_site/';
     
     // Redirecionar após 2 segundos (para mostrar a animação)
     setTimeout(() => {
